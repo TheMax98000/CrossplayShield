@@ -1,3 +1,5 @@
+<img src="docs/logo.png" alt="CrossplayShield" width="160" align="right">
+
 # CrossplayShield
 
 Anti-exploit for **cross-play servers** (Paper or Folia with Geyser/Floodgate) that does not kick your Bedrock
@@ -8,7 +10,7 @@ bed can send hundreds of packets per second ([Geyser #6775](https://github.com/G
 player. CrossplayShield limits packets **per type**, gives Bedrock players (detected by Floodgate) a wider margin,
 and only adds what Paper does not already do.
 
-> **Status:** version 1.0.0 in preparation.
+> **Status:** version 1.0.0 released: free edition in [Releases](../../releases/latest), full edition on [Payhip](https://payhip.com/b/vG04p).
 
 ## Measured, not guessed
 
@@ -37,7 +39,7 @@ Walking, sleeping, chests, building and mining: no packet blocked, no kick, on a
 | [Developer API](docs/api.md) | | ✔ |
 
 - **Free**: SpigotMC and CurseForge (links when published)
-- **Full**: 9.99 USD on Payhip (link when published)
+- **Full**: 9.99 USD on [Payhip](https://payhip.com/b/vG04p)
 
 Both editions start with nothing to configure. Set `dry-run: true` for a day after installing to see what would be
 blocked without blocking anything.
