@@ -7,7 +7,7 @@
 | `/cs audit` | Check the Paper, ViaVersion and Floodgate settings, with the line to change for each problem |
 | `/cs alerts` | Toggle in-game alerts for yourself (full edition) |
 | `/cs info <player>` | Java or Bedrock (with the device), current packets per second, last blocks |
-| `/cs exempt <player> [seconds]` | Exempt a player from every protection (default: 60 s), e.g. while you test a plugin |
+| `/cs exempt <player> [seconds]` | Exempt a player from every protection (default: 60 s), e.g. while you test a plugin. Ends early if the player leaves or on `/cs reload` |
 | `/cs reload` | Reload `config.yml` and the language files |
 
 | Permission | Default | Description |

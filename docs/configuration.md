@@ -2,7 +2,9 @@
 
 `plugins/CrossplayShield/config.yml`. Apply changes with `/cs reload`. New keys are added automatically to existing
 files when you update the plugin. Wrong values are reported in the server log: an unknown action becomes `block`,
-an unknown packet type, a limit that is not a positive number or an invalid regular expression is ignored.
+an unknown packet type, a limit that is not a positive number or an invalid regular expression is ignored, a limit
+above 1,000,000 is capped. If `config.yml` is not valid YAML, the file is left untouched: the plugin starts on its
+defaults (or `/cs reload` keeps the current settings) until you fix it.
 
 Each protection has an `action`:
 
@@ -12,7 +14,7 @@ Each protection has an `action`:
 | `log` | Only write a line in the server log |
 | `kick` | Block and kick the player |
 
-A protection writes at most one log line (and one alert) per player per second, even during a flood.
+A protection writes at most one log line (and one alert) per player, or per chunk, per second, even during a flood.
 
 ## General
 
@@ -57,10 +59,11 @@ limiter is on, and that ViaVersion's own limiter does not kick Bedrock players w
 
 | Key | Default | Description |
 |---|---|---|
-| `discord.webhook-url` | `""` | Discord webhook URL (channel → Edit → Integrations → Webhooks). Empty = disabled |
+| `discord.webhook-url` | `""` | Discord webhook URL (channel → Edit → Integrations → Webhooks), starting with `https://`. Empty = disabled; an invalid address is reported in the log |
 | `discord.min-interval-seconds` | `30` | Minimum delay between two messages for the same player and protection |
 
-In-game alerts go to players with `crossplayshield.alerts`; each one can mute them with `/cs alerts`.
+In-game alerts go to players with `crossplayshield.alerts`. Players who also have `crossplayshield.admin` can mute
+them for themselves with `/cs alerts`.
 
 ### Creative items
 
@@ -86,12 +89,14 @@ Counted when something arrives in the chunk. Nothing that is already there is ev
 | Key | Default | Description |
 |---|---|---|
 | `chunk-limits.enabled` | `true` | Limit per chunk |
-| `chunk-limits.action` | `block` | `block` refuses the new item (an item dropping on the ground is then lost), `log` only logs |
-| `chunk-limits.max-ground-items` | `200` | Items lying on the ground in one chunk |
-| `chunk-limits.max-written-books` | `100` | Written books in the containers of one chunk (chests, barrels, shulker boxes placed as blocks…) |
-| `chunk-limits.max-container-bytes` | `1048576` | Total size of the shulker boxes and bundles stored in the containers of one chunk, uncompressed (repetitive text that compresses well still counts in full) |
+| `chunk-limits.action` | `block` | `block` refuses the new item (an item dropping on the ground then disappears), `log` only logs |
+| `chunk-limits.max-ground-items` | `200` | Items lying on the ground in one chunk. Items a player throws, drops on death or gets from a block they break always fall; the limit stops farms, dispensers and mob drops |
+| `chunk-limits.max-written-books` | `100` | Written books in the containers of one chunk (chests, double chests, barrels, shulker boxes placed as blocks…) |
+| `chunk-limits.max-container-bytes` | `8388608` | Total size of the shulker boxes and bundles stored in the containers of one chunk, uncompressed (repetitive text that compresses well still counts in full) |
 
-Player clicks, drags and hoppers are checked. `0` disables a limit.
+Player clicks, drags and hoppers bringing items in from another chunk are checked. `0` disables a limit. Totals are
+recounted at most once per second (books) or every 10 seconds (shulker boxes and bundles) per chunk; in between,
+accepted deposits are added and withdrawals are not subtracted, so a total can only be too high, never too low.
 
 ### Command filter
 
