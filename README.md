@@ -10,7 +10,7 @@ bed can send hundreds of packets per second ([Geyser #6775](https://github.com/G
 player. CrossplayShield limits packets **per type**, gives Bedrock players (detected by Floodgate) a wider margin,
 and only adds what Paper does not already do.
 
-> **Status:** version 1.0.0 released: free edition on [SpigotMC](https://www.spigotmc.org/resources/crossplayshield.139762/) and in [Releases](../../releases/latest), full edition on [Payhip](https://payhip.com/b/vG04p).
+> **Status:** version 1.0.0 released: free edition on [SpigotMC](https://www.spigotmc.org/resources/crossplayshield.139762/), [CurseForge](https://www.curseforge.com/minecraft/bukkit-plugins/crossplayshield) and in [Releases](../../releases/latest), full edition on [Payhip](https://payhip.com/b/vG04p).
 
 ## Measured, not guessed
 
@@ -38,7 +38,7 @@ Walking, sleeping, chests, building and mining: no packet blocked, no kick, on a
 | Alerts in game and on Discord | | ✔ |
 | [Developer API](docs/api.md) | | ✔ |
 
-- **Free**: [SpigotMC](https://www.spigotmc.org/resources/crossplayshield.139762/) (CurseForge: link when published)
+- **Free**: [SpigotMC](https://www.spigotmc.org/resources/crossplayshield.139762/), [CurseForge](https://www.curseforge.com/minecraft/bukkit-plugins/crossplayshield)
 - **Full**: 9.99 USD on [Payhip](https://payhip.com/b/vG04p)
 
 Both editions start with nothing to configure. Set `dry-run: true` for a day after installing to see what would be
